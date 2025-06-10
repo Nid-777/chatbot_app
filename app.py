@@ -5,7 +5,7 @@ import os
 import json
 from vosk import Model, KaldiRecognizer
 
-import pythoncom  # required to initialize COM thread on Windows
+
 from audio_recorder_streamlit import audio_recorder
 
 # Alternative TTS for cloud deployment
