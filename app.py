@@ -1,5 +1,5 @@
 import streamlit as st
-import sounddevice as sd
+
 from scipy.io.wavfile import write
 import wave
 import os
