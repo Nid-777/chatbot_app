@@ -10,8 +10,20 @@ import pythoncom  # required to initialize COM thread on Windows
 
 def speak(text):
     try:
-        pythoncom.CoInitialize()  # ✅ Required fix on Windows
+        pythoncom.CoInitialize()
         engine = pyttsx3.init()
+        
+        # Adjust voice properties for better quality
+        engine.setProperty('rate', 150)  # Slower speech
+        engine.setProperty('volume', 1.0)  # Maximum volume
+        
+        # Try to find a deeper voice (Windows only)
+        voices = engine.getProperty('voices')
+        for voice in voices:
+            if "deep" in voice.name.lower() or "male" in voice.name.lower():
+                engine.setProperty('voice', voice.id)
+                break
+                
         engine.say(text)
         engine.runAndWait()
         engine.stop()
