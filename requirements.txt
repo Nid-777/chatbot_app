@@ -1,9 +1,7 @@
-streamlit>=1.12.0
-sounddevice
-scipy
-vosk>=0.3.44
-pyttsx3
-pythoncom
-pyaudio
-audio-recorder-streamlit>=0.0.8
-gTTS
+streamlit>=1.28.0
+vosk==0.3.45
+gTTS==2.3.2
+audio-recorder-streamlit==0.0.8
+soundfile==0.12.1
+pydub==0.25.1
+pyaudio==0.2.13

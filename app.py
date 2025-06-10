@@ -16,6 +16,12 @@ from gtts import gTTS
 import base64
 import os
 
+@st.cache_resource
+def load_vosk_model():
+    if not os.path.exists("vosk-model-small-en-us-0.15"):
+        os.system("wget https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip && unzip vosk-model-small-en-us-0.15.zip")
+    return Model("vosk-model-small-en-us-0.15")
+
 def speak(text):
     try:
         # Create speech file
