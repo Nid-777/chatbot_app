@@ -131,13 +131,13 @@ if st.session_state.stage == "start":
     col1, col2, col3 = st.columns(3)
     if col1.button("📊 Calculate Life Insurance"):
         st.session_state.stage = "calc"
-        st.experimental_rerun()
+        st.rerun()
     elif col2.button("🏥 Suggest Health Insurance"):
         st.session_state.stage = "health"
-        st.experimental_rerun()
+        st.rerun()
     elif col3.button("🛡 Suggest Life Insurance"):
         st.session_state.stage = "life"
-        st.experimental_rerun()
+        st.rerun()
 
 
 elif st.session_state.stage == "calc":
