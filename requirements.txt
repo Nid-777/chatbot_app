@@ -4,4 +4,4 @@ gTTS==2.3.2
 audio-recorder-streamlit==0.0.8
 soundfile==0.12.1
 pydub==0.25.1
-pyaudio==0.2.13
+
