@@ -1,0 +1,7 @@
+streamlit
+sounddevice
+scipy
+vosk
+pyttsx3
+pythoncom
+pyaudio
