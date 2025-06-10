@@ -1,13 +1,12 @@
-import streamlit as st # type: ignore
-
+import streamlit as st
 
 import wave
 import os
 import json
-from vosk import Model, KaldiRecognizer # type: ignore
+from vosk import Model, KaldiRecognizer
 
 import pythoncom  # required to initialize COM thread on Windows
-from audio_recorder_streamlit import audio_recorder # type: ignore
+from audio_recorder_streamlit import audio_recorder
 
 # Alternative TTS for cloud deployment
 from gtts import gTTS
