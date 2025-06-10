@@ -14,7 +14,7 @@ def speak(text):
         engine = pyttsx3.init()
         
         # Adjust voice properties for better quality
-        engine.setProperty('rate', 150)  # Slower speech
+        engine.setProperty('rate', 130)  # Slower speech
         engine.setProperty('volume', 1.0)  # Maximum volume
         
         # Try to find a deeper voice (Windows only)
