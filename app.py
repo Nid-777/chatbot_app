@@ -8,27 +8,52 @@ from vosk import Model, KaldiRecognizer
 import pyttsx3
 import pythoncom  # required to initialize COM thread on Windows
 
+# Alternative TTS for cloud deployment
+from gtts import gTTS
+import base64
+
+from gtts import gTTS
+import base64
+import os
+
 def speak(text):
     try:
-        pythoncom.CoInitialize()
-        engine = pyttsx3.init()
+        # Create speech file
+        tts = gTTS(text=text, lang='en', slow=False)
+        tts.save("output.mp3")
         
-        # Adjust voice properties for better quality
-        engine.setProperty('rate', 130)  # Slower speech
-        engine.setProperty('volume', 1.0)  # Maximum volume
+        # Read the file and encode it
+        with open("output.mp3", "rb") as audio_file:
+            audio_bytes = audio_file.read()
+        audio_base64 = base64.b64encode(audio_bytes).decode('utf-8')
         
-        # Try to find a deeper voice (Windows only)
-        voices = engine.getProperty('voices')
-        for voice in voices:
-            if "deep" in voice.name.lower() or "male" in voice.name.lower():
-                engine.setProperty('voice', voice.id)
-                break
-                
-        engine.say(text)
-        engine.runAndWait()
-        engine.stop()
-    except RuntimeError:
-        pass
+        # Create HTML audio element with autoplay
+        audio_html = f"""
+            <audio autoplay>
+                <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mp3">
+            </audio>
+            """
+        
+        # Inject HTML with JavaScript for wider compatibility
+        autoplay_script = """
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var audioElements = document.getElementsByTagName('audio');
+                    for (var i = 0; i < audioElements.length; i++) {
+                        audioElements[i].play();
+                    }
+                });
+            </script>
+            """
+        
+        # Display the HTML
+        st.components.v1.html(audio_html + autoplay_script, height=0)
+        
+        # Clean up the temporary file
+        os.remove("output.mp3")
+        
+    except Exception as e:
+        st.warning(f"Voice error: {str(e)}. Continuing without voice.")
 
 
 st.set_page_config(page_title="Free Insurance Chatbot", layout="centered")
