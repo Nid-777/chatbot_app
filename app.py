@@ -7,6 +7,7 @@ import json
 from vosk import Model, KaldiRecognizer
 import pyttsx3
 import pythoncom  # required to initialize COM thread on Windows
+from audio_recorder_streamlit import audio_recorder
 
 # Alternative TTS for cloud deployment
 from gtts import gTTS
@@ -66,13 +67,16 @@ def load_stt_model():
 
 model = load_stt_model()
 
-def record_audio(filename="input.wav", duration=5):
-    fs = 16000
-    st.info("🎙 Recording... Speak now.")
-    recording = sd.rec(int(duration * fs), samplerate=fs, channels=1)
-    sd.wait()
-    write(filename, fs, recording)
-    st.success("✅ Recording done!")
+def record_audio(filename="input.wav"):
+    st.info("🎙 Click the microphone to record...")
+    audio_bytes = audio_recorder()
+    
+    if audio_bytes:
+        with open(filename, "wb") as f:
+            f.write(audio_bytes)
+        st.success("✅ Recording saved!")
+        return True
+    return False
 
 def transcribe_audio(filename="input.wav"):
     wf = wave.open(filename, "rb")
