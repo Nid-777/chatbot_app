@@ -1,6 +1,6 @@
 import streamlit as st
 
-from scipy.io.wavfile import write
+
 import wave
 import os
 import json
