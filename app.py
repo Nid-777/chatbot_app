@@ -81,7 +81,7 @@ if st.button("🔄 Restart"):
 
 if st.session_state.stage == "start":
     st.write("👋 How can I help you today?")
-    speak("How can I help you today?")
+    
     col1, col2, col3 = st.columns(3)
     if col1.button("📊 Calculate Life Insurance"):
         st.session_state.stage = "calc"
